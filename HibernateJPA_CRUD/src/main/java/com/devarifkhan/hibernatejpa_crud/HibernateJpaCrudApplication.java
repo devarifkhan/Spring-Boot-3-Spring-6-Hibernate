@@ -17,8 +17,27 @@ public class HibernateJpaCrudApplication {
     @Bean
     public CommandLineRunner commandLineRunner(StudentDAO studentDAO) {
         return runner -> {
-            createStudent(studentDAO);
+//            createStudent(studentDAO);
+            createMultipleStudent(studentDAO);
         };
+    }
+
+    private void createMultipleStudent(StudentDAO studentDAO) {
+        // create multiple student objects
+        Student student1 = new Student("John", "Doe", "john.doe@example.com");
+        Student student2 = new Student("Jane", "Smith", "jane.smith@example.com");
+        Student student3 = new Student("Mike", "Johnson", "mike.johnson@example.com");
+
+        // save the student objects
+        System.out.println("Saving the students....");
+        studentDAO.save(student1);
+        studentDAO.save(student2);
+        studentDAO.save(student3);
+
+        // display ids of the students
+        System.out.println("Saved student 1. Generated id: " + student1.getId());
+        System.out.println("Saved student 2. Generated id: " + student2.getId());
+        System.out.println("Saved student 3. Generated id: " + student3.getId());
     }
 
     private void createStudent(StudentDAO studentDAO) {
