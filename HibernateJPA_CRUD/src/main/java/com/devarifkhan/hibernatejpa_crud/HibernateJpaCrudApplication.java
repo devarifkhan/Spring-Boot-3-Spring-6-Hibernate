@@ -18,8 +18,33 @@ public class HibernateJpaCrudApplication {
     public CommandLineRunner commandLineRunner(StudentDAO studentDAO) {
         return runner -> {
 //            createStudent(studentDAO);
-            createMultipleStudent(studentDAO);
+//            createMultipleStudent(studentDAO);
+            readStudent(studentDAO);
+
+
         };
+    }
+
+    private void readStudent(StudentDAO studentDAO) {
+        // create a student object
+        System.out.println("creating a new student .....");
+        Student student = new Student("Ariful", "Islam", "ariful@hotmail.com");
+
+        // save the student
+        System.out.println("Saving student");
+        studentDAO.save(student);
+
+        // display id of the saved student
+        int theId=student.getId();
+        System.out.println("Saved student. Generated id: " + theId);
+
+        //retrieve a student based on the primary key
+        System.out.println("Getting student with id: " + theId);
+        student = studentDAO.findById(theId);
+
+        // display student
+        System.out.println(student);
+
     }
 
     private void createMultipleStudent(StudentDAO studentDAO) {
