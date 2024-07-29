@@ -37,7 +37,7 @@ public class StudentDAOImpl implements StudentDAO {
     @Override
     public List<Student> findAll() {
         //create a query to get all students
-        TypedQuery<Student> theQuery= entityManager.createQuery("From Student order by lastName asc",Student.class);
+        TypedQuery<Student> theQuery = entityManager.createQuery("From Student order by lastName asc", Student.class);
 
         //return query result
         return theQuery.getResultList();
@@ -46,7 +46,7 @@ public class StudentDAOImpl implements StudentDAO {
     @Override
     public List<Student> findByLastName(String theLastName) {
         // create a query
-        TypedQuery<Student> theQuery= entityManager.createQuery("from Student where lastName=:theData", Student.class);
+        TypedQuery<Student> theQuery = entityManager.createQuery("from Student where lastName=:theData", Student.class);
 
         // set query parameter
         theQuery.setParameter("theData", theLastName);
@@ -54,6 +54,12 @@ public class StudentDAOImpl implements StudentDAO {
         // return query result
 
         return theQuery.getResultList();
+    }
+
+    @Override
+    @Transactional
+    public void update(Student theStudent) {
+        entityManager.merge(theStudent);
     }
 }
 
