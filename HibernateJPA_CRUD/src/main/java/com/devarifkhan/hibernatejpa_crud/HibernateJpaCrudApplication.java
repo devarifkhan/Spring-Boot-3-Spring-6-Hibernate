@@ -20,7 +20,7 @@ public class HibernateJpaCrudApplication {
     public CommandLineRunner commandLineRunner(StudentDAO studentDAO) {
         return runner -> {
 //            createStudent(studentDAO);
-//            createMultipleStudent(studentDAO);
+            createMultipleStudent(studentDAO);
 //            readStudent(studentDAO);
 //queryForStudents(studentDAO);
 //            queryForStudentsByLastName(studentDAO);
@@ -28,7 +28,7 @@ public class HibernateJpaCrudApplication {
 //            updateStudent(studentDAO);
 //            deleteStudent(studentDAO);
 
-            deleteAllStudents(studentDAO);
+            // deleteAllStudents(studentDAO);
         };
     }
 
@@ -36,7 +36,7 @@ public class HibernateJpaCrudApplication {
         // delete all students
         System.out.println("Deleting all students....");
 //        studentDAO.deleteAll();
-        System.out.println("All students deleted: "+ studentDAO.deleteAll());
+        System.out.println("All students deleted: " + studentDAO.deleteAll());
 
     }
 
