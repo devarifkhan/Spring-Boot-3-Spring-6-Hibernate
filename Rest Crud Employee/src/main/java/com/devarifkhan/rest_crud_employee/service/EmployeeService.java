@@ -1,10 +1,10 @@
-package com.devarifkhan.rest_crud_employee.dao;
+package com.devarifkhan.rest_crud_employee.service;
 
 import com.devarifkhan.rest_crud_employee.entity.Employee;
 
 import java.util.List;
 
-public interface EmployeeDAO {
+public interface EmployeeService {
     List<Employee> findAll();
 
     Employee findById(Integer id);
