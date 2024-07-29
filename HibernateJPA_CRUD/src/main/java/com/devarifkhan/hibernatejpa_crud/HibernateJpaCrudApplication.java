@@ -20,19 +20,72 @@ public class HibernateJpaCrudApplication {
     public CommandLineRunner commandLineRunner(StudentDAO studentDAO) {
         return runner -> {
 //            createStudent(studentDAO);
-//            createMultipleStudent(studentDAO);
+            createMultipleStudent(studentDAO);
 //            readStudent(studentDAO);
-queryForStudents(studentDAO);
+//queryForStudents(studentDAO);
+//            queryForStudentsByLastName(studentDAO);
 
+//            updateStudent(studentDAO);
+//            deleteStudent(studentDAO);
+
+            // deleteAllStudents(studentDAO);
         };
+    }
+
+    private void deleteAllStudents(StudentDAO studentDAO) {
+        // delete all students
+        System.out.println("Deleting all students....");
+//        studentDAO.deleteAll();
+        System.out.println("All students deleted: " + studentDAO.deleteAll());
+
+    }
+
+    private void deleteStudent(StudentDAO studentDAO) {
+        // retrieve a student based on the id: primary key
+        int studentId = 1;
+        System.out.println("Getting student with id: " + studentId);
+        Student student = studentDAO.findById(studentId);
+        // delete the student
+        System.out.println("Deleting student....");
+        studentDAO.delete(studentId);
+
+        //display the updated student
+        System.out.println("Deleted student: " + student);
+    }
+
+    private void updateStudent(StudentDAO studentDAO) {
+        // retrieve a student based on the id: primary key
+        int studentId = 7;
+        System.out.println("Getting student with id: " + studentId);
+        Student student = studentDAO.findById(studentId);
+        // change first name to "Ariful"
+        System.out.println("Updating student....");
+        student.setFirstName("Ariful");
+        //update the student
+        studentDAO.update(student);
+
+        //display the updated student
+        System.out.println("Updated student: " + student);
+
+    }
+
+    private void queryForStudentsByLastName(StudentDAO studentDAO) {
+        // get a list of students
+        List<Student> theStudents = studentDAO.findByLastName("Islam");
+        // display list of students
+        for (Student tempStudent : theStudents) {
+            System.out.println(tempStudent);
+        }
+
+
     }
 
     private void queryForStudents(StudentDAO studentDAO) {
         // get a list of students
-        List<Student> theStudents= studentDAO.findAll();
+        List<Student> theStudents = studentDAO.findAll();
 
         // display list of students
-        for(Student tempStudent: theStudents){
+        for (Student tempStudent : theStudents) {
             System.out.println(tempStudent);
         }
 
@@ -48,7 +101,7 @@ queryForStudents(studentDAO);
         studentDAO.save(student);
 
         // display id of the saved student
-        int theId=student.getId();
+        int theId = student.getId();
         System.out.println("Saved student. Generated id: " + theId);
 
         //retrieve a student based on the primary key
