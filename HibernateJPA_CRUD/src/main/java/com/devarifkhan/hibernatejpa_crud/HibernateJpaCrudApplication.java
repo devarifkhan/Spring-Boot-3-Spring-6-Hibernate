@@ -26,8 +26,18 @@ public class HibernateJpaCrudApplication {
 //            queryForStudentsByLastName(studentDAO);
 
 //            updateStudent(studentDAO);
-            deleteStudent(studentDAO);
+//            deleteStudent(studentDAO);
+
+            deleteAllStudents(studentDAO);
         };
+    }
+
+    private void deleteAllStudents(StudentDAO studentDAO) {
+        // delete all students
+        System.out.println("Deleting all students....");
+//        studentDAO.deleteAll();
+        System.out.println("All students deleted: "+ studentDAO.deleteAll());
+
     }
 
     private void deleteStudent(StudentDAO studentDAO) {

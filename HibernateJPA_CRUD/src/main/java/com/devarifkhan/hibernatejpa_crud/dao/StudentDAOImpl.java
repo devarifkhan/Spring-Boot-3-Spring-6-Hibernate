@@ -74,6 +74,26 @@ public class StudentDAOImpl implements StudentDAO {
 
 
     }
+
+    @Override
+    @Transactional
+    public int deleteAll() {
+        // create a query
+        TypedQuery<Student> theQuery = entityManager.createQuery("from Student", Student.class);
+
+        // get the result list
+        List<Student> students = theQuery.getResultList();
+
+        // delete all students
+        for (Student tempStudent : students) {
+            entityManager.remove(tempStudent);
+        }
+
+        // return the number of deleted students
+        return students.size();
+
+
+    }
 }
 
 
