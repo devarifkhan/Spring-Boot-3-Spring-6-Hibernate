@@ -14,25 +14,19 @@
     <br>
     Country:
     <select th:field="*{country}">
-        <option th:value="BD">Bangladesh</option>
-        <option th:value="USA">USA</option>
-        <option th:value="UK">UK</option>
-        <option th:value="Australia">Australia</option>
+        <option th:each="country : ${countries}" th:value="${country}" th:text="${country}"></option>
+
     </select>
 
 
     <br></br>
     Favorite Language:
-    <input type="checkbox" th:field="*{favoriteLanguage}" value="Java"> Java</input>
-    <input type="checkbox" th:field="*{favoriteLanguage}" value="Python"> Python</input>
-    <input type="checkbox" th:field="*{favoriteLanguage}" value="C++"> C++</input>
+    <input type="checkbox" th:field="*{favoriteLanguage}" th:each="tempSystem: ${languages}" th:value="${tempSystem}" th:text="${tempSystem}"/>
 
     <br></br>
 
     Favourite Operating System:
-    <input type="checkbox" th:field="*{favoriteOperatingSystem}" th:value="Windows"> Windows</input>
-    <input type="checkbox" th:field="*{favoriteOperatingSystem}" th:value="Mac"> Mac</input>
-    <input type="checkbox" th:field="*{favoriteOperatingSystem}" th:value="Linux"> Linux</input>
+    <input type="checkbox" th:field="*{favoriteOperatingSystem}" th:each="tempSystem: ${systems}" th:value="${tempSystem}" th:text="${tempSystem}"/>
 
     <br></br>
 
