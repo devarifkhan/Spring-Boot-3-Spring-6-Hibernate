@@ -17,6 +17,8 @@
             <label for="lastName">Last name:</label>
             <input type="text" id="lastName" th:field="*{lastName}" class="form-control"/>
         </div>
+        <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="text-danger"></span>
+
 
         <div class="form-group">
             <label for="freePasses">Free passes:</label>
@@ -25,7 +27,22 @@
         <span th:if="${#fields.hasErrors('freePasses')}" th:errors="*{freePasses}" class="text-danger"></span>
 
 
-        <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="text-danger"></span>
+        <div class="form-group">
+            <label for="postalCode">Postal Code:</label>
+            <input id="postalCode" type="text" th:field="*{postalCode}"/>
+        </div>
+        <span th:if="${#fields.hasErrors('postalCode')}" th:errors="*{postalCode}" class="text-danger"></span>
+
+
+        <div class="form-group">
+            <label for="courseCode">courseCode:</label>
+            <input id="courseCode" type="text" th:field="*{courseCode}"/>
+        </div>
+        <span th:if="${#fields.hasErrors('courseCode')}" th:errors="*{courseCode}" class="text-danger"></span>
+
+
+
+
 
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
