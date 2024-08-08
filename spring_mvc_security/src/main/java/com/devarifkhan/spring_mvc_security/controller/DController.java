@@ -1,0 +1,13 @@
+package com.devarifkhan.spring_mvc_security.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+
+@Controller
+public class DController {
+
+    @GetMapping("/")
+    public String showHome() {
+        return "home";
+    }
+}
