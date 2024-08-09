@@ -10,4 +10,10 @@ public class DController {
     public String showHome() {
         return "home";
     }
+
+    // add a request for  /leaders
+    @GetMapping("/leaders")
+    public String showLeaders() {
+        return "leaders";
+    }
 }

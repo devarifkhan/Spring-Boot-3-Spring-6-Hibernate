@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,6 +19,11 @@
         <p>Name: <span th:text="${#authentication.principal.username}"></span></p>
         <p>Roles: <span th:text="${#authentication.principal.authorities}"></span></p>
 
+        <!-- add a link to point to /leaders ... this is for the managers -->
+        <p>
+            <a th:href="@{/leaders}">Leadership meeting </a>
+            (Only for manager peeps)
+        </p>
 
         <!-- add logout button-->
         <form action="#" th:action="@{/logout}" method="post" >
