@@ -4,36 +4,36 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.LogoutConfigurer;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.provisioning.JdbcUserDetailsManager;
+import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+
+import javax.sql.DataSource;
 
 @Configuration
 public class DSecurityConfig {
 
     @Bean
-    public InMemoryUserDetailsManager userDetailsManager(){
-        UserDetails john= User.builder()
-                .username("john")
-                .password("{noop}12345")
-                .roles("EMPLOYEE")
-                .build();
-        UserDetails mary= User.builder()
-                .username("mary")
-                .password("{noop}12345")
-                .roles("EMPLOYEE","MANAGER")
-                .build();
+    public UserDetailsManager userDetailsManager(DataSource dataSource){
+        JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager();
 
-        UserDetails susan= User.builder()
-                .username("susan")
-                .password("{noop}12345")
-                .roles("EMPLOYEE","MANAGER","ADMIN")
-                .build();
+        // define query to retrieve a user by username
+        jdbcUserDetailsManager.setUsersByUsernameQuery(
+                "select username,password,enabled from users where username=?"
+        );
 
-        return new InMemoryUserDetailsManager(john,mary,susan);
+        // define query to retrieve roles for a user
+        jdbcUserDetailsManager.setAuthoritiesByUsernameQuery(
+                "select user_id,role from roles where user_id=?"
+        );
 
+        return jdbcUserDetailsManager;
     }
+
+
+
+
+
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
@@ -60,4 +60,29 @@ public class DSecurityConfig {
         return http.build();
 
     }
+
+
+
+//        @Bean
+//    public InMemoryUserDetailsManager userDetailsManager(){
+//        UserDetails john= User.builder()
+//                .username("john")
+//                .password("{noop}12345")
+//                .roles("EMPLOYEE")
+//                .build();
+//        UserDetails mary= User.builder()
+//                .username("mary")
+//                .password("{noop}12345")
+//                .roles("EMPLOYEE","MANAGER")
+//                .build();
+//
+//        UserDetails susan= User.builder()
+//                .username("susan")
+//                .password("{noop}12345")
+//                .roles("EMPLOYEE","MANAGER","ADMIN")
+//                .build();
+//
+//        return new InMemoryUserDetailsManager(john,mary,susan);
+//
+//    }
 }
