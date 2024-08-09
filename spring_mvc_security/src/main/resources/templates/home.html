@@ -12,6 +12,16 @@
     <div class="container mt-4">
         <h1>Welcome to MyApp</h1>
         <p>This is the home page.</p>
+
+        <!-- display name and roles-->
+        <p>Name: <span th:text="${#authentication.principal.username}"></span></p>
+        <p>Roles: <span th:text="${#authentication.principal.authorities}"></span></p>
+
+
+        <!-- add logout button-->
+        <form action="#" th:action="@{/logout}" method="post" >
+            <button type="submit" class="btn btn-primary">Logout</button>
+        </form>
     </div>
 
 
