@@ -19,18 +19,27 @@ public class JpaOneToOneUniApplication {
     public CommandLineRunner commandLineRunner(AppDAO appDAO) {
         return runner -> {
             // createInstructor(appDAO);
-            findInstructor(appDAO);
+            // findInstructor(appDAO);
+            deleteInstructor(appDAO);
         };
     }
 
+    private void deleteInstructor(AppDAO appDAO) {
+        int theId = 2;
+        System.out.println("Deleting Instructor id: " + theId);
+
+        appDAO.deleteInstructorById(theId);
+        System.out.println("Instructor deleted with id: " + theId);
+    }
+
     private void findInstructor(AppDAO appDAO) {
-        int theId=2;
-        System.out.println("Finding Instructor id: "+theId);
+        int theId = 2;
+        System.out.println("Finding Instructor id: " + theId);
 
-        Instructor instructor=appDAO.findInstructorById(theId);
+        Instructor instructor = appDAO.findInstructorById(theId);
 
-        System.out.println("FoundInstructor"+instructor);
-        System.out.println("The associate instructorDetail only: "+instructor);
+        System.out.println("FoundInstructor" + instructor);
+        System.out.println("The associate instructorDetail only: " + instructor);
     }
 
     private void createInstructor(AppDAO appDAO) {
