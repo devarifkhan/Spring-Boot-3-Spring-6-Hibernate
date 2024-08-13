@@ -11,4 +11,6 @@ public interface AppDAO  {
     void deleteInstructorById(int theId);
 
     InstructorDetail findInstructorDetailsById(int theId);
+
+    void deleteInstructorDetailById(int theId);
 }
