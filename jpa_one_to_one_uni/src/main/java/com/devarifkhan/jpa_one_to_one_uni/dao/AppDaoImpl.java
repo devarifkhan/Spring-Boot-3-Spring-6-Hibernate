@@ -1,6 +1,7 @@
 package com.devarifkhan.jpa_one_to_one_uni.dao;
 
 import com.devarifkhan.jpa_one_to_one_uni.entity.Instructor;
+import com.devarifkhan.jpa_one_to_one_uni.entity.InstructorDetail;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,5 +27,19 @@ public class AppDaoImpl implements AppDAO{
     @Override
     public Instructor findInstructorById(int theId) {
         return entityManager.find(Instructor.class,theId);
+    }
+
+    @Override
+    @Transactional
+    public void deleteInstructorById(int theId) {
+
+        Instructor instructor= entityManager.find(Instructor.class,theId);
+        entityManager.remove(instructor);
+
+    }
+
+    @Override
+    public InstructorDetail findInstructorDetailsById(int theId) {
+        return entityManager.find(InstructorDetail.class,theId);
     }
 }
