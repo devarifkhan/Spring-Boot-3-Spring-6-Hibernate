@@ -20,8 +20,21 @@ public class JpaOneToOneUniApplication {
         return runner -> {
             // createInstructor(appDAO);
             // findInstructor(appDAO);
-            deleteInstructor(appDAO);
+            // deleteInstructor(appDAO);
+
+            findInstructorDetail(appDAO);
         };
+    }
+
+    private void findInstructorDetail(AppDAO appDAO) {
+        // get the instructor detail object
+        int theId=2;
+        InstructorDetail instructorDetail = appDAO.findInstructorDetailsById(theId);
+
+        // print the instructor detail
+        System.out.println("Instructor Detail: " + instructorDetail);
+        System.out.println("The associated instructor: " + instructorDetail.getInstructor());
+
     }
 
     private void deleteInstructor(AppDAO appDAO) {
