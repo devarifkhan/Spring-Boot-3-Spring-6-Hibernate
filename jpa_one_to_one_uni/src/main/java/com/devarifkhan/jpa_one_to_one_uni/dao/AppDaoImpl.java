@@ -98,6 +98,7 @@ public class AppDaoImpl implements AppDAO {
     }
 
     @Override
+    @Transactional
     public void deleteCourseById(int theId) {
 
         Course course = entityManager.find(Course.class, theId);

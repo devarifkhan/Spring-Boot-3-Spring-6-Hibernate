@@ -48,10 +48,25 @@ public class JpaOneToOneUniApplication {
 
 //            createCourseAndReviews(appDAO);
 
-            retrieveCourseAndReviews(appDAO);
+//            retrieveCourseAndReviews(appDAO);
+            deleteCourseAndReviews(appDAO);
         };
         
 
+    }
+
+    private void deleteCourseAndReviews(AppDAO appDAO) {
+        int theId=10;
+        System.out.println("Finding course id: "+theId);
+        Course course=appDAO.findCourseAndReviewByCourseId(theId);
+
+        System.out.println("Course: "+course);
+        System.out.println("Reviews: "+course.getReviews());
+
+        System.out.println("Deleting course id: "+theId);
+        appDAO.deleteCourseById(theId);
+
+        System.out.println("Done!");
     }
 
     private void retrieveCourseAndReviews(AppDAO appDAO) {
