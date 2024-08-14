@@ -71,4 +71,10 @@ public class AppDaoImpl implements AppDAO{
         // execute the query
         return query.getSingleResult();
     }
+
+    @Override
+    @Transactional
+    public void update(Instructor instructor) {
+        entityManager.merge(instructor);
+    }
 }

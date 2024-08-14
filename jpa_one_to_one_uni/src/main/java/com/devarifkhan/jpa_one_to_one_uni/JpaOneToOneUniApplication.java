@@ -34,9 +34,29 @@ public class JpaOneToOneUniApplication {
 
 //            findCoursesForInstructor(appDAO);
 
-            findInstructorWithCoursesJoinFetch(appDAO);
+//            findInstructorWithCoursesJoinFetch(appDAO);
+            
+            
+            updateInstructor(appDAO);
+            
         };
+        
 
+    }
+
+    private void updateInstructor(AppDAO appDAO) {
+        int theId=3;
+
+        //find the instructor
+        System.out.println("Finding instructor id: "+theId);
+        Instructor instructor= appDAO.findInstructorById(theId);
+
+        // update the instructor
+        System.out.println("Updating instructor id: "+theId);
+        instructor.setFirstName("Arif");
+
+        appDAO.update(instructor);
+        System.out.println("DONE!");
     }
 
     private void findInstructorWithCoursesJoinFetch(AppDAO appDAO) {
