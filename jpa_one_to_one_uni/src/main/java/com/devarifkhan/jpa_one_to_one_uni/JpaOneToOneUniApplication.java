@@ -39,8 +39,9 @@ public class JpaOneToOneUniApplication {
             
 //            updateInstructor(appDAO);
             
-            updateCourse(appDAO);
-            
+//            updateCourse(appDAO);
+
+            deleteInstructor(appDAO);
         };
         
 
