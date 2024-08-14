@@ -1,10 +1,7 @@
 package com.devarifkhan.jpa_one_to_one_uni;
 
 import com.devarifkhan.jpa_one_to_one_uni.dao.AppDAO;
-import com.devarifkhan.jpa_one_to_one_uni.entity.Course;
-import com.devarifkhan.jpa_one_to_one_uni.entity.Instructor;
-import com.devarifkhan.jpa_one_to_one_uni.entity.InstructorDetail;
-import com.devarifkhan.jpa_one_to_one_uni.entity.Review;
+import com.devarifkhan.jpa_one_to_one_uni.entity.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -49,10 +46,36 @@ public class JpaOneToOneUniApplication {
 //            createCourseAndReviews(appDAO);
 
 //            retrieveCourseAndReviews(appDAO);
-            deleteCourseAndReviews(appDAO);
+//            deleteCourseAndReviews(appDAO);
+
+//            createCourseAndStudents(appDAO);
+
+            findCourseAndStudents(appDAO);
+
         };
         
 
+    }
+
+    private void findCourseAndStudents(AppDAO appDAO) {
+        int theId=10;
+        System.out.println("Finding course id: "+theId);
+        Course course=appDAO.findCourseAndStudentByCourseId(theId);
+
+        System.out.println("Course: "+course);
+        System.out.println("Students: "+course.getStudents());
+
+        System.out.println("Done!");
+    }
+
+    private void createCourseAndStudents(AppDAO appDAO) {
+        Course course=new Course("Java");
+        course.addStudent(new Student("Arif","Khan","arifkhan@gmail.com"));
+        course.addStudent(new Student("Arman","Khan","armankhan@gmail.com"));
+
+        System.out.println("Saving course: "+course);
+
+        appDAO.save(course);
     }
 
     private void deleteCourseAndReviews(AppDAO appDAO) {
