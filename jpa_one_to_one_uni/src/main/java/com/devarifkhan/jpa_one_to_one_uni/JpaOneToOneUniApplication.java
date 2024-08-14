@@ -4,6 +4,7 @@ import com.devarifkhan.jpa_one_to_one_uni.dao.AppDAO;
 import com.devarifkhan.jpa_one_to_one_uni.entity.Course;
 import com.devarifkhan.jpa_one_to_one_uni.entity.Instructor;
 import com.devarifkhan.jpa_one_to_one_uni.entity.InstructorDetail;
+import com.devarifkhan.jpa_one_to_one_uni.entity.Review;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -43,10 +44,24 @@ public class JpaOneToOneUniApplication {
 
 //            deleteInstructor(appDAO);]
             
-            deleteCourse(appDAO);
+//            deleteCourse(appDAO);
+
+            createCourseAndReviews(appDAO);
         };
         
 
+    }
+
+    private void createCourseAndReviews(AppDAO appDAO) {
+        Course course=new Course("Java");
+        course.addReview(new Review("Great course"));
+        course.addReview(new Review("Awesome course"));
+        course.addReview(new Review("Bad course"));
+
+        System.out.println("Saving course: "+course);
+        System.out.println(course.getReviews());
+
+        appDAO.save(course);
     }
 
     private void deleteCourse(AppDAO appDAO) {
