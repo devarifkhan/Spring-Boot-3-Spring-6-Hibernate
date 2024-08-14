@@ -24,8 +24,22 @@ public class JpaOneToOneUniApplication {
 
 //            findInstructorDetail(appDAO);
 
-            deleteInstructorDetail(appDAO);
+//            deleteInstructorDetail(appDAO);
+
+            createInstructorWithCourses(appDAO);
         };
+
+    }
+
+    private void createInstructorWithCourses(AppDAO appDAO) {
+        Instructor instructor = new Instructor("cobra", "khan", "arifcse209@gmail.com");
+        InstructorDetail instructorDetail = new InstructorDetail("www://youtube.com", "programming");
+
+        instructor.setInstructorDetail(instructorDetail);
+
+        System.out.println("Saving Instructor: " + instructor);
+        appDAO.save(instructor);
+        System.out.println("Instructor Saved: " + instructor);
 
     }
 
