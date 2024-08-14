@@ -27,8 +27,23 @@ public class JpaOneToOneUniApplication {
 
 //            deleteInstructorDetail(appDAO);
 
-            createInstructorWithCourses(appDAO);
+//            createInstructorWithCourses(appDAO);
+            findInstructorWithCourses(appDAO);
+            
         };
+
+    }
+
+    private void findInstructorWithCourses(AppDAO appDAO) {
+        int theId=3;
+        System.out.println("Finding Instructor id: "+theId);
+
+        Instructor instructor=appDAO.findInstructorById(theId);
+        System.out.println("Instructor: "+instructor);
+        System.out.println("The associated courses: "+instructor.getCourses());
+
+        System.out.println("Done!");
+
 
     }
 
