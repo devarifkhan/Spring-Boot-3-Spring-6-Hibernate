@@ -1,9 +1,7 @@
 package com.devarifkhan.jpa_one_to_one_uni;
 
 import com.devarifkhan.jpa_one_to_one_uni.dao.AppDAO;
-import com.devarifkhan.jpa_one_to_one_uni.entity.Course;
-import com.devarifkhan.jpa_one_to_one_uni.entity.Instructor;
-import com.devarifkhan.jpa_one_to_one_uni.entity.InstructorDetail;
+import com.devarifkhan.jpa_one_to_one_uni.entity.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -37,15 +35,112 @@ public class JpaOneToOneUniApplication {
 //            findInstructorWithCoursesJoinFetch(appDAO);
             
             
-            updateInstructor(appDAO);
+//            updateInstructor(appDAO);
             
+//            updateCourse(appDAO);
+
+//            deleteInstructor(appDAO);]
+            
+//            deleteCourse(appDAO);
+
+//            createCourseAndReviews(appDAO);
+
+//            retrieveCourseAndReviews(appDAO);
+//            deleteCourseAndReviews(appDAO);
+
+//            createCourseAndStudents(appDAO);
+
+            findCourseAndStudents(appDAO);
+
         };
         
 
     }
 
+    private void findCourseAndStudents(AppDAO appDAO) {
+        int theId=10;
+        System.out.println("Finding course id: "+theId);
+        Course course=appDAO.findCourseAndStudentByCourseId(theId);
+
+        System.out.println("Course: "+course);
+        System.out.println("Students: "+course.getStudents());
+
+        System.out.println("Done!");
+    }
+
+    private void createCourseAndStudents(AppDAO appDAO) {
+        Course course=new Course("Java");
+        course.addStudent(new Student("Arif","Khan","arifkhan@gmail.com"));
+        course.addStudent(new Student("Arman","Khan","armankhan@gmail.com"));
+
+        System.out.println("Saving course: "+course);
+
+        appDAO.save(course);
+    }
+
+    private void deleteCourseAndReviews(AppDAO appDAO) {
+        int theId=10;
+        System.out.println("Finding course id: "+theId);
+        Course course=appDAO.findCourseAndReviewByCourseId(theId);
+
+        System.out.println("Course: "+course);
+        System.out.println("Reviews: "+course.getReviews());
+
+        System.out.println("Deleting course id: "+theId);
+        appDAO.deleteCourseById(theId);
+
+        System.out.println("Done!");
+    }
+
+    private void retrieveCourseAndReviews(AppDAO appDAO) {
+        int theId=10;
+        System.out.println("Finding course id: "+theId);
+        Course course=appDAO.findCourseAndReviewByCourseId(theId);
+
+        System.out.println("Course: "+course);
+        System.out.println("Reviews: "+course.getReviews());
+
+        System.out.println("Done!");
+    }
+
+    private void createCourseAndReviews(AppDAO appDAO) {
+        Course course=new Course("Java");
+        course.addReview(new Review("Great course"));
+        course.addReview(new Review("Awesome course"));
+        course.addReview(new Review("Bad course"));
+
+        System.out.println("Saving course: "+course);
+        System.out.println(course.getReviews());
+
+        appDAO.save(course);
+    }
+
+    private void deleteCourse(AppDAO appDAO) {
+        int theId=10;
+        // delete the course
+        System.out.println("Deleting course id: "+theId);
+        appDAO.deleteCourseById(theId);
+
+        System.out.println("DONE!");
+    }
+
+    private void updateCourse(AppDAO appDAO) {
+
+        int theId=10;
+        System.out.println("Finding course id: "+theId);
+        Course course= appDAO.findCourseById(theId);
+
+        // update the course
+        System.out.println("Updating course id: "+theId);
+        course.setTitle("Advanced Java");
+
+        appDAO.update(course);
+
+        System.out.println("DONE!");
+    }
+
     private void updateInstructor(AppDAO appDAO) {
-        int theId=3;
+        int theId=2;
 
         //find the instructor
         System.out.println("Finding instructor id: "+theId);
