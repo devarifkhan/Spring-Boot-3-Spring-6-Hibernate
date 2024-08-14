@@ -21,7 +21,7 @@ public class AppDaoImpl implements AppDAO{
     @Override
     @Transactional
     public void save(Instructor theInstructor) {
-        entityManager.persist(theInstructor);
+        entityManager.merge(theInstructor);
     }
 
     @Override

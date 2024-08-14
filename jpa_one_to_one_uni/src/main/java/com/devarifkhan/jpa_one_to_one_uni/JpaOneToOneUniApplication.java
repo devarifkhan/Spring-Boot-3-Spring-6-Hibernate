@@ -1,6 +1,7 @@
 package com.devarifkhan.jpa_one_to_one_uni;
 
 import com.devarifkhan.jpa_one_to_one_uni.dao.AppDAO;
+import com.devarifkhan.jpa_one_to_one_uni.entity.Course;
 import com.devarifkhan.jpa_one_to_one_uni.entity.Instructor;
 import com.devarifkhan.jpa_one_to_one_uni.entity.InstructorDetail;
 import org.springframework.boot.CommandLineRunner;
@@ -40,6 +41,20 @@ public class JpaOneToOneUniApplication {
         System.out.println("Saving Instructor: " + instructor);
         appDAO.save(instructor);
         System.out.println("Instructor Saved: " + instructor);
+
+        // create some courses
+        Course course1=new Course("Java");
+        Course course2=new Course("Python");
+        Course course3=new Course("C++");
+
+        // add courses to instructor
+        instructor.add(course1);
+        instructor.add(course2);
+        instructor.add(course3);
+
+        System.out.println("Instructor updated: " + instructor);
+        appDAO.save(instructor);
+        System.out.println("Instructor with courses updated: " + instructor);
 
     }
 
