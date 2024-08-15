@@ -23,6 +23,15 @@ public class MyLoggingAspect {
         System.out.println("Method: "+methodSignature);
         // display method arguments
         Object[] args=theJoinPoint.getArgs();
+
+        for(Object arg:args){
+            System.out.println(arg);
+            if(arg instanceof com.devarifkhan.aspect_oriented_programming.Account){
+                com.devarifkhan.aspect_oriented_programming.Account account=(com.devarifkhan.aspect_oriented_programming.Account) arg;
+                System.out.println("Account name: "+account.getName());
+                System.out.println("Account level: "+account.getLevel());
+            }
+        }
     }
 
 

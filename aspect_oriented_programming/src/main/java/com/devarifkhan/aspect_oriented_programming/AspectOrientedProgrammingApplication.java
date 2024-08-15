@@ -25,6 +25,8 @@ public class AspectOrientedProgrammingApplication {
     private void TheBeforeAdvice(AccountDAO theAccountDAO, MembershipDAO theMembershipDAO) {
         // call the business method
         Account myAccount = new Account();
+        myAccount.setName("Arif");
+        myAccount.setLevel("Platinum");
         theAccountDAO.addAccount(myAccount,true);
         theAccountDAO.doWork();
 
