@@ -1,6 +1,7 @@
 package com.devarifkhan.aspect_oriented_programming;
 
 import com.devarifkhan.aspect_oriented_programming.dao.AccountDAO;
+import com.devarifkhan.aspect_oriented_programming.dao.MembershipDAO;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -15,15 +16,20 @@ public class AspectOrientedProgrammingApplication {
 
 
     @Bean
-    public CommandLineRunner commandLineRunner(AccountDAO theAccountDAO) {
+    public CommandLineRunner commandLineRunner(AccountDAO theAccountDAO, MembershipDAO theMembershipDAO ) {
         return runner -> {
-            TheBeforeAdvice(theAccountDAO);
+            TheBeforeAdvice(theAccountDAO,theMembershipDAO);
         };
     }
 
-    private void TheBeforeAdvice(AccountDAO theAccountDAO) {
+    private void TheBeforeAdvice(AccountDAO theAccountDAO, MembershipDAO theMembershipDAO) {
         // call the business method
-        theAccountDAO.addAccount();
+        Account myAccount = new Account();
+        theAccountDAO.addAccount(myAccount,true);
+
+        //call the membership business method
+        theMembershipDAO.addSillyMember();
+
 
     }
 }
