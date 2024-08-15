@@ -2,10 +2,8 @@ package com.devarifkhan.aspect_oriented_programming.aspect;
 
 import com.devarifkhan.aspect_oriented_programming.Account;
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.annotation.AfterReturning;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.*;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
@@ -17,6 +15,61 @@ import java.util.List;
 @Component
 @Order(2)
 public class MyLoggingAspect {
+
+
+
+    @Around("execution(* com.devarifkhan.aspect_oriented_programming.service.*.getFortune(..))")
+
+    public Object aroundGetFortune(
+            ProceedingJoinPoint theProceedingJoinPoint
+    ) throws Throwable {
+        String method = theProceedingJoinPoint.getSignature().toShortString();
+        System.out.println("\n===> Executing @Around on method: " + method);
+
+        long begin= System.currentTimeMillis();
+        Object result= null;
+
+        try{
+            result=theProceedingJoinPoint.proceed();
+
+        }
+        catch (Exception e){
+            System.out.println("\n===> Executing @Around on method: " + method);
+            System.out.println("\n===> Exception: " + e.getMessage());
+
+            // rethrow exception
+            throw e;
+        }
+
+
+
+        long end=System.currentTimeMillis();
+        long duration=end-begin;
+
+        System.out.println("\n===>Duration: "+duration/ 1000.0 +" seconds");
+        return result;
+    }
+
+
+    @After("execution(* com.devarifkhan.aspect_oriented_programming.dao.AccountDAO.findAccounts(..))")
+    public void afterFinallyFindAccountsAdvice(JoinPoint theJoinPoint) {
+        String method = theJoinPoint.getSignature().toShortString();
+        System.out.println("\n===> Executing @afterFinallyFindAccountsAdvice on method: " + method);
+
+    }
+
+    // add a pointcut for all methods in the com.devarifkhan.aspect_oriented_programming.dao package
+    @AfterThrowing(
+            pointcut = "execution(* com.devarifkhan.aspect_oriented_programming.dao.AccountDAO.findAccounts(..))",
+            throwing = "theExc"
+    )
+    public void afterThrowingFindAccountsAdvice(JoinPoint theJoinPoint, Throwable theExc) {
+        String method = theJoinPoint.getSignature().toShortString();
+        System.out.println("\n===> Executing @AfterThrowing on method: " + method);
+
+        System.out.println("\n===> The Exception is: " + theExc);
+
+    }
 
     // add a new advice for @AfterReturning on the find accounts method
     @AfterReturning(pointcut = "execution(* com.devarifkhan.aspect_oriented_programming.dao.AccountDAO.findAccounts(..))", returning = "result")
@@ -35,7 +88,7 @@ public class MyLoggingAspect {
 
     private void convertAccountNamesToUpperCase(List<Account> result) {
         for (Account account : result) {
-            String theUpperCase=account.getName().toUpperCase();
+            String theUpperCase = account.getName().toUpperCase();
             account.setName(theUpperCase);
         }
     }
