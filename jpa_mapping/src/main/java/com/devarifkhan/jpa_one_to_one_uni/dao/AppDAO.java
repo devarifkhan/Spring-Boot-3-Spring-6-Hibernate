@@ -3,6 +3,7 @@ package com.devarifkhan.jpa_one_to_one_uni.dao;
 import com.devarifkhan.jpa_one_to_one_uni.entity.Course;
 import com.devarifkhan.jpa_one_to_one_uni.entity.Instructor;
 import com.devarifkhan.jpa_one_to_one_uni.entity.InstructorDetail;
+import com.devarifkhan.jpa_one_to_one_uni.entity.Student;
 
 import java.util.List;
 
@@ -34,4 +35,11 @@ public interface AppDAO  {
     Course findCourseAndReviewByCourseId(int theId);
 
     Course findCourseAndStudentByCourseId(int theId);
+
+    Student findStudentAndCourseByStudentId(int theId);
+
+    void update(Student student);
+
+    void deleteStudentById(int theId);
+
 }

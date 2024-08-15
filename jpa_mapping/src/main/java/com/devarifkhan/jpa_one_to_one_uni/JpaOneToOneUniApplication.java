@@ -50,11 +50,48 @@ public class JpaOneToOneUniApplication {
 
 //            createCourseAndStudents(appDAO);
 
-            findCourseAndStudents(appDAO);
+//            findCourseAndStudents(appDAO);
+//              findStudentAndCourse(appDAO);
+//            addMoreCoursesForStudent(appDAO);
 
+//            deleteCourse(appDAO);
+
+            deleteStudent(appDAO);
         };
         
 
+    }
+
+    private void deleteStudent(AppDAO appDAO) {
+        int theId=1;
+        System.out.println("Finding student id: "+theId);
+        Student student=appDAO.findStudentAndCourseByStudentId(theId);
+
+        System.out.println("Deleting student: "+student);
+        appDAO.deleteStudentById(theId);
+    }
+
+    private void addMoreCoursesForStudent(AppDAO appDAO) {
+        int theId=1;
+        System.out.println("Finding student id: "+theId);
+        Student student=appDAO.findStudentAndCourseByStudentId(theId);
+
+        System.out.println("Adding courses to student: "+student);
+        student.addCourse(new Course("Python"));
+        student.addCourse(new Course("JavaScript"));
+
+        appDAO.update(student);
+    }
+
+    private void findStudentAndCourse(AppDAO appDAO) {
+        int theId=1;
+        System.out.println("Finding student id: "+theId);
+        Student student=appDAO.findStudentAndCourseByStudentId(theId);
+
+        System.out.println("Student: "+student);
+        System.out.println("Courses: "+student.getCourses());
+
+        System.out.println("Done!");
     }
 
     private void findCourseAndStudents(AppDAO appDAO) {
