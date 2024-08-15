@@ -26,9 +26,21 @@ public class AspectOrientedProgrammingApplication {
         // call the business method
         Account myAccount = new Account();
         theAccountDAO.addAccount(myAccount,true);
+        theAccountDAO.doWork();
+
+        //call teh accountdao getter/ setter methods
+        theAccountDAO.setName("foobar");
+        theAccountDAO.setServiceCode("silver");
+        System.out.println(theAccountDAO.getName());
+        System.out.println(theAccountDAO.getServiceCode());
+
 
         //call the membership business method
         theMembershipDAO.addSillyMember();
+        theMembershipDAO.goToSleep();
+
+
+
 
 
     }
