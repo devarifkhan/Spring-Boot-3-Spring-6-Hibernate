@@ -3,6 +3,7 @@ package com.devarifkhan.jpa_one_to_one_uni.dao;
 import com.devarifkhan.jpa_one_to_one_uni.entity.Course;
 import com.devarifkhan.jpa_one_to_one_uni.entity.Instructor;
 import com.devarifkhan.jpa_one_to_one_uni.entity.InstructorDetail;
+import com.devarifkhan.jpa_one_to_one_uni.entity.Student;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
@@ -125,5 +126,28 @@ public class AppDaoImpl implements AppDAO {
         TypedQuery<Course> query = entityManager.createQuery("select c from Course c " + "JOIN FETCH c.students " + "where c.id=:data", Course.class);
         query.setParameter("data", theId);
         return query.getSingleResult();
+    }
+
+    @Override
+    public Student findStudentAndCourseByStudentId(int theId) {
+        TypedQuery<Student> query = entityManager.createQuery("select s from Student s " + "JOIN FETCH s.courses " + "where s.id=:data", Student.class);
+        query.setParameter("data", theId);
+        return query.getSingleResult();
+    }
+
+    @Override
+    @Transactional
+    public void update(Student student) {
+
+        entityManager.merge(student);
+
+    }
+
+    @Override
+    @Transactional
+    public void deleteStudentById(int theId) {
+        Student student = entityManager.find(Student.class, theId);
+        entityManager.remove(student);
+
     }
 }
